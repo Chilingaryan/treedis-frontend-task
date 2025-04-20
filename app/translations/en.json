@@ -9,5 +9,12 @@
   "login": "Login",
   "forgotPassword": "Forgot Password?",
   "createAccount": "Create New Account",
-  "register": "Register"
+  "register": "Register",
+  "validation": {
+    "invalidEmail": "Invalid email",
+    "emailRequired": "Email is required",
+    "passwordTooShort": "Password must be at least 8 characters",
+    "passwordRequired": "Password is required",
+    "passwordComplexity": "Password must contain at least 1 uppercase, 1 lowercase, and 1 digit"
+  }
 }

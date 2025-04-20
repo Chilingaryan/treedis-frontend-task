@@ -1,5 +1,20 @@
 {
   "take": "קח",
   "reality": "מציאות",
-  "toTheNextLevel": "לרמה הבאה"
+  "toTheNextLevel": "לרמה הבאה",
+  "welcome": "ברוך הבא!",
+  "loginToContinue": "התחבר כדי להמשיך",
+  "emailAddress": "כתובת אימייל",
+  "password": "סיסמה",
+  "login": "התחבר",
+  "forgotPassword": "שכחת סיסמה?",
+  "createAccount": "צור חשבון חדש",
+  "register": "הרשמה",
+  "validation": {
+    "invalidEmail": "אימייל לא תקין",
+    "emailRequired": "נדרש להזין אימייל",
+    "passwordTooShort": "הסיסמה חייבת להכיל לפחות 8 תווים",
+    "passwordRequired": "נדרש להזין סיסמה",
+    "passwordComplexity": "הסיסמה חייבת להכיל לפחות אות אחת גדולה, אות אחת קטנה, וספרה אחת"
+  }
 }
