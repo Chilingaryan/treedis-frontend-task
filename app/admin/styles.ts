@@ -1,10 +1,10 @@
 import { Box, styled } from "@mui/material";
 
-export const Container = styled(Box)({
+export const Container = styled(Box)(({ theme }) => ({
   display: "flex",
   height: "100vh",
   overflow: "hidden",
-});
+}));
 
 export const LeftPanel = styled(Box)(({ theme }) => ({
   width: "50%",
@@ -13,16 +13,24 @@ export const LeftPanel = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   alignItems: "flex-end",
   padding: theme.spacing(8, 10),
+
+  [theme.breakpoints.between("xs", "md")]: {
+    display: "none",
+  },
 }));
 
-export const RightPanel = styled(Box)({
+export const RightPanel = styled(Box)(({ theme }) => ({
   width: "50%",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   position: "relative",
   padding: 32,
-});
+
+  [theme.breakpoints.between("xs", "md")]: {
+    width: "100%",
+  },
+}));
 
 export const Highlight = styled("span")(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,

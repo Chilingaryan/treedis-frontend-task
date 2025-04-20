@@ -27,6 +27,22 @@ export const getRegisterSchema = (t: TFunction, step: 1 | 2) => {
         country: yup.string().required("Required"),
         heardFrom: yup.string().required("Required"),
         isProvider: yup.string().required("Select Yes or No"),
+
+        spaces: yup.string().when("isProvider", {
+          is: "true",
+          then: (schema) => schema.required("Required when provider is true"),
+          otherwise: (schema) => schema.notRequired(),
+        }),
+
+        industry: yup.string().when("isProvider", {
+          is: (val: string) => val !== "true",
+          then: (schema) => schema.required("Required when provider is false"),
+          otherwise: (schema) => schema.notRequired(),
+        }),
+
+        employees: yup.string().required("Required"),
+        jobDescription: yup.string().required("Required"),
+        website: yup.string().required("Required"),
         subscribe: yup.boolean(),
         terms: yup.boolean().oneOf([true], "You must agree to the terms"),
       });

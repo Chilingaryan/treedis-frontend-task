@@ -10,6 +10,7 @@
   "forgotPassword": "Forgot Password?",
   "createAccount": "Create New Account",
   "register": "Register",
+  "almostThere": "Almost there...",
   "validation": {
     "invalidEmail": "Invalid email",
     "emailRequired": "Email is required",

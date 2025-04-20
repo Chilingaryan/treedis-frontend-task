@@ -1,7 +1,7 @@
 import { createTheme } from "@mui/material";
 
 export const theme = (direction: "rtl" | "ltr" = "ltr") => {
-  const isRtl = direction === "rtl";
+  const rtl = direction === "rtl";
 
   return createTheme({
     direction,
@@ -9,24 +9,22 @@ export const theme = (direction: "rtl" | "ltr" = "ltr") => {
       fontFamily: "CodecPro, sans-serif",
     },
     components: {
-      MuiTextField: {
-        styleOverrides: {
-          root: {
-            "& .MuiInputLabel-root": {
-              right: isRtl ? 25 : "auto",
-              left: isRtl ? "auto" : 0,
-              transformOrigin: isRtl ? "top right" : "top left",
-            },
-
-            ".MuiOutlinedInput-notchedOutline": {
-              textAlign: "unset",
-            },
-
-            ".MuiFormHelperText-root": {
-              textAlign: "unset",
-            },
-          },
-        },
+      MuiCssBaseline: {
+        styleOverrides: rtl
+          ? {
+              ".react-tel-input .form-control": {
+                paddingRight: "unset",
+                paddingLeft: "48px",
+                direction: "ltr",
+              },
+              ".react-tel-input .selected-flag .flag": {
+                left: "10px",
+              },
+              ".react-tel-input .selected-flag .flag .arrow": {
+                right: "10px",
+              },
+            }
+          : {},
       },
 
       MuiButton: {
@@ -36,8 +34,6 @@ export const theme = (direction: "rtl" | "ltr" = "ltr") => {
             borderRadius: "8px",
             fontWeight: 500,
             boxShadow: "none",
-            // paddingTop: 15,
-            // paddingBottom: 15,
           },
           contained: {
             boxShadow: "none",
@@ -47,11 +43,6 @@ export const theme = (direction: "rtl" | "ltr" = "ltr") => {
           },
         },
       },
-      // MuiTextField: {
-      //   defaultProps: {
-      //     variant: "outlined",
-      //   },
-      // },
       MuiOutlinedInput: {
         styleOverrides: {
           root: {

@@ -1,7 +1,7 @@
 import { theme } from "@/theme";
 import React, { useEffect, useState } from "react";
-
 import { ThemeProvider as MuiThemeProvider } from "@mui/material";
+
 import i18n from "@/translations/i18n";
 import { isRtl } from "@/utils/language";
 

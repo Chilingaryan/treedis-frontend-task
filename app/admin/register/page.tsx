@@ -10,36 +10,57 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import { getRegisterSchema } from "./schema";
 import { RegisterForm } from "./form";
+import { Step, useRegistrationStore } from "@/stores/useRegistrationStore";
 // import { RegisterForm } from "./form";
 
 const RegisterPage = () => {
   const { t } = useTranslation();
-  const schema = getRegisterSchema(t, 1);
+
+  const step = useRegistrationStore((s) => s.step);
+  const setStep = useRegistrationStore((s) => s.setStep);
+  const setData = useRegistrationStore((s) => s.setData);
+
+  const schema = getRegisterSchema(t, step);
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = (step: 1 | 2) =>
+  const router = useRouter();
+
+  const onSubmit = (step: Step) =>
     handleSubmit((data: any) => {
-      console.log(step, data);
+      console.log(data);
+      setStep(2);
+      setData(data);
     });
 
-  const router = useRouter();
+  const handleGoBack = () => {
+    switch (step) {
+      case 1: {
+        router.push("/admin/login");
+        break;
+      }
+      case 2: {
+        setStep(1);
+        break;
+      }
+    }
+  };
 
   return (
     <Box width="100%" maxWidth={450}>
       <Typography variant="h5" fontWeight={600} gutterBottom>
-        {t("register")}
+        {t(step === 1 ? "register" : "almostThere")}
       </Typography>
 
-      <Button onClick={() => router.push("/admin/login")}>
+      <Button onClick={handleGoBack}>
         <ArrowBackIcon />
       </Button>
 
       <RegisterForm
-        step={1}
+        step={step}
         onSubmit={onSubmit}
         control={control}
         errors={errors}
