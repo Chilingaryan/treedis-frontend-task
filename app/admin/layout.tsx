@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Box, Typography } from "@mui/material";
 
 import * as S from "./styles";
+import { LanguageSwitcher } from "@/components/language-switcher/language-switcher";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -37,6 +38,8 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
           {children}
         </S.Wrapper>
       </S.RightPanel>
+
+      <LanguageSwitcher />
     </S.Container>
   );
 };
