@@ -10,11 +10,37 @@
   "forgotPassword": "שכחת סיסמה?",
   "createAccount": "צור חשבון חדש",
   "register": "הרשמה",
+  "almostThere": "כמעט סיימנו...",
+  "countryRegion": "מדינה/אזור",
+
+  "next": "הבא",
+  "firstName": "שם פרטי",
+  "lastName": "שם משפחה",
+  "confirmPassword": "אשר סיסמה",
+  "howYouHeard": "איך שמעת עלינו?",
+
+  "company": "חברה",
+  "phone": "טלפון",
+  "isMatterportProvider": "האם אתה ספק שירות של Matterport?",
+  "yes": "כן",
+  "no": "לא",
+  "industry": "תעשייה",
+  "numberOfEmployees": "מספר עובדים",
+  "jobDescription": "תיאור תפקיד",
+  "website": "אתר אינטרנט",
+  "subscribeNewsletter": "הירשם לניוזלטר שלנו",
+  "termsAndPolicies": "בהרשמה אני מסכים ל{{terms}}, {{cookies}} ו{{privacy}} של Treedis.",
+
   "validation": {
     "invalidEmail": "אימייל לא תקין",
     "emailRequired": "נדרש להזין אימייל",
     "passwordTooShort": "הסיסמה חייבת להכיל לפחות 8 תווים",
     "passwordRequired": "נדרש להזין סיסמה",
-    "passwordComplexity": "הסיסמה חייבת להכיל לפחות אות אחת גדולה, אות אחת קטנה, וספרה אחת"
+    "passwordComplexity": "הסיסמה חייבת להכיל לפחות אות אחת גדולה, אות אחת קטנה, וספרה אחת",
+    "passwordsMustMatch": "הסיסמאות חייבות להיות זהות",
+    "required": "שדה זה הינו חובה",
+    "max30": "חייב להכיל עד 30 תווים",
+    "confirmPassword": "אנא אשר את הסיסמה שלך",
+    "termsRequired": "יש לאשר את התנאים"
   }
 }

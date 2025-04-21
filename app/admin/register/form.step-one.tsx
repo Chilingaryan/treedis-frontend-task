@@ -1,11 +1,14 @@
-import { FormInput } from "@/components/form/form-input";
-import { Step } from "@/stores/useRegistrationStore";
 import React from "react";
+import { Control } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+
+import { Step1Fields } from "./schema";
+import { FormInput } from "@/components/form";
+import { Step } from "@/stores/useRegistrationStore";
 
 interface FormStep1Props {
   step: Step;
-  control: any;
+  control: Control<Step1Fields>;
 }
 
 export const FormStep1: React.FC<FormStep1Props> = ({ step, control }) => {

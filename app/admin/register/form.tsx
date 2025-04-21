@@ -1,35 +1,22 @@
 import React from "react";
-
-import {
-  IconButton,
-  InputAdornment,
-  FormHelperText,
-  FormControlLabel,
-  RadioGroup,
-  Typography,
-  Radio,
-  Checkbox,
-  FormControl,
-  Button,
-  Box,
-} from "@mui/material";
+import { Control } from "react-hook-form";
+import { Button, Box } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-import { FormStep1 } from "./form.step_1";
-import { FormStep2 } from "./form.step_2";
+import { FormStep1 } from "./form.step-one";
+import { FormStep2 } from "./form.step-two";
 import { Step } from "@/stores/useRegistrationStore";
+import { FullRegisterForm, Step1Fields, Step2Fields } from "./schema";
 
 interface RegisterFormProps {
-  onSubmit: any;
   step: Step;
-  control: any;
-  errors: any;
+  control: Control<Partial<FullRegisterForm>>;
+  onSubmit: (step: Step) => React.FormEventHandler<HTMLFormElement>;
 }
 
 export const RegisterForm: React.FC<RegisterFormProps> = ({
   onSubmit,
   control,
-  errors,
   step,
 }) => {
   const { t } = useTranslation();
@@ -42,10 +29,15 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
           overflow: "auto",
         }}
       >
-        <FormStep1 step={step} control={control} />
-        <FormStep2 step={step} control={control} errors={errors} />
+        <FormStep1 step={step} control={control as Control<Step1Fields>} />
+        <FormStep2 step={step} control={control as Control<Step2Fields>} />
       </Box>
-      <Button type="submit" fullWidth variant="contained" sx={{ marginTop: 1 }}>
+      <Button
+        fullWidth
+        type="submit"
+        variant="contained"
+        sx={{ marginTop: "10px" }}
+      >
         {t(step === 1 ? "next" : "register")}
       </Button>
     </form>

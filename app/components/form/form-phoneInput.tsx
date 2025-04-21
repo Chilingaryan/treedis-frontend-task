@@ -7,14 +7,12 @@ type FormPhoneInputProps<T extends FieldValues> = {
   name: Path<T>;
   control: Control<T>;
   label: string;
-  type?: string;
 } & Omit<TextFieldProps, "name" | "control" | "defaultValue">;
 
 export function FormPhoneInput<T extends FieldValues>({
   name,
   control,
   label,
-  type = "text",
   ...props
 }: FormPhoneInputProps<T>) {
   return (

@@ -1,11 +1,16 @@
-import { Control, Controller, FieldValues, Path } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  FieldValues,
+  Path,
+  PathValue,
+} from "react-hook-form";
 import {
   FormControl,
   FormHelperText,
   InputLabel,
   MenuItem,
   Select,
-  TextField,
   TextFieldProps,
 } from "@mui/material";
 
@@ -22,12 +27,11 @@ export function FormSelect<T extends FieldValues>({
   control,
   label,
   options,
-  type = "text",
 }: FormSelectProps<T>) {
   return (
     <Controller
       name={name}
-      defaultValue=""
+      defaultValue={"" as PathValue<T, Path<T>>}
       control={control}
       render={({ field, fieldState }) => (
         <FormControl fullWidth margin="normal" error={!!fieldState.error}>

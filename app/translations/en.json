@@ -11,11 +11,36 @@
   "createAccount": "Create New Account",
   "register": "Register",
   "almostThere": "Almost there...",
+  "countryRegion": "Country/Region",
+
+  "next": "Next",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "confirmPassword": "Confirm Password",
+  "howYouHeard": "How you heard about us",
+
+  "company": "Company",
+  "phone": "Phone",
+  "isMatterportProvider": "Are you a Matterport service provider?",
+  "yes": "Yes",
+  "no": "No",
+  "industry": "Industry",
+  "numberOfEmployees": "Number of employees",
+  "jobDescription": "Job description",
+  "website": "Website",
+  "subscribeNewsletter": "Subscribe to our newsletter",
+  "termsAndPolicies": "By registering, I agree to Treedis {{terms}}, {{cookies}}, and {{privacy}}.",
+
   "validation": {
     "invalidEmail": "Invalid email",
     "emailRequired": "Email is required",
     "passwordTooShort": "Password must be at least 8 characters",
     "passwordRequired": "Password is required",
-    "passwordComplexity": "Password must contain at least 1 uppercase, 1 lowercase, and 1 digit"
+    "passwordComplexity": "Password must contain at least 1 uppercase, 1 lowercase, and 1 digit",
+    "passwordsMustMatch": "Passwords must match",
+    "required": "This field is required",
+    "max30": "Must be at most 30 characters",
+    "confirmPassword": "Please confirm your password",
+    "termsRequired": "You must agree to the terms"
   }
 }

@@ -1,20 +1,22 @@
 import React from "react";
+import { Control } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { useTranslation } from "react-i18next";
 import { Box, Button } from "@mui/material";
+import { useTranslation } from "react-i18next";
+
 import { FormInput } from "@/components/form/form-input";
 
+type LoginFormFields = {
+  email: string;
+  password: string;
+};
+
 interface LoginFormProps {
-  onSubmit: any;
-  control: any;
-  errors: any;
+  control: Control<LoginFormFields>;
+  onSubmit: React.FormEventHandler<HTMLFormElement>;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = ({
-  onSubmit,
-  control,
-  errors,
-}) => {
+export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, control }) => {
   const { t } = useTranslation();
 
   const router = useRouter();
@@ -30,11 +32,16 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       <FormInput
         name="password"
         control={control}
-        label="Password"
+        label={t("password")}
         type="password"
       />
 
-      <Button type="submit" fullWidth variant="contained">
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        sx={{ marginTop: "20px" }}
+      >
         {t("login")}
       </Button>
 

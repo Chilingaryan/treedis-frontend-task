@@ -1,40 +1,44 @@
 "use client";
 
 import React from "react";
+import { ObjectSchema } from "yup";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
-import { Typography, Box, Button } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Typography, Box, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-import { getRegisterSchema } from "./schema";
 import { RegisterForm } from "./form";
+import { FullRegisterForm, getRegisterSchema } from "./schema";
 import { Step, useRegistrationStore } from "@/stores/useRegistrationStore";
-// import { RegisterForm } from "./form";
 
 const RegisterPage = () => {
   const { t } = useTranslation();
 
   const step = useRegistrationStore((s) => s.step);
+  const registerData = useRegistrationStore((s) => s.data);
   const setStep = useRegistrationStore((s) => s.setStep);
   const setData = useRegistrationStore((s) => s.setData);
 
   const schema = getRegisterSchema(t, step);
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+
+  const { control, handleSubmit } = useForm<Partial<FullRegisterForm>>({
+    resolver: yupResolver(schema as ObjectSchema<Partial<FullRegisterForm>>),
+  });
 
   const router = useRouter();
 
   const onSubmit = (step: Step) =>
-    handleSubmit((data: any) => {
-      console.log(data);
-      setStep(2);
+    handleSubmit((data) => {
+      if (step === 1) {
+        setStep(2);
+      }
+
       setData(data);
     });
+
+  console.log(registerData);
 
   const handleGoBack = () => {
     switch (step) {
@@ -59,12 +63,7 @@ const RegisterPage = () => {
         <ArrowBackIcon />
       </Button>
 
-      <RegisterForm
-        step={step}
-        onSubmit={onSubmit}
-        control={control}
-        errors={errors}
-      />
+      <RegisterForm step={step} onSubmit={onSubmit} control={control} />
     </Box>
   );
 };

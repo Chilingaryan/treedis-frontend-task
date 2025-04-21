@@ -1,24 +1,21 @@
 "use client";
 
 import React from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Typography, Box } from "@mui/material";
-import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { LoginForm } from "./form";
-import { getLoginSchema } from "./schema";
-import { useTranslatedSchema } from "@/hooks/useTranslatedSchema";
+import { LoginFields, getLoginSchema } from "./schema";
 
 const LoginPage = () => {
   const { t } = useTranslation();
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(getLoginSchema(t)) });
+  const { control, handleSubmit } = useForm({
+    resolver: yupResolver(getLoginSchema(t)),
+  });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: LoginFields) => {
     console.log(data);
   };
 
@@ -30,11 +27,7 @@ const LoginPage = () => {
         {t("loginToContinue")}
       </Typography>
 
-      <LoginForm
-        onSubmit={handleSubmit(onSubmit)}
-        control={control}
-        errors={errors}
-      />
+      <LoginForm onSubmit={handleSubmit(onSubmit)} control={control} />
     </Box>
   );
 };

@@ -10,3 +10,5 @@ export const getLoginSchema = (t: TFunction) =>
       .required(t("validation.emailRequired")),
     password: passwordSchema(t),
   });
+
+export type LoginFields = yup.InferType<ReturnType<typeof getLoginSchema>>;

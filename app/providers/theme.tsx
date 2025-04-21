@@ -13,11 +13,17 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [dir, setDir] = useState<"rtl" | "ltr">("ltr");
 
   useEffect(() => {
-    i18n.on("languageChanged", (lng) => {
+    const onLanguageChanged = (lng: string) => {
       const _dir = isRtl(lng) ? "rtl" : "ltr";
       document.body.dir = _dir;
       setDir(_dir);
-    });
+    };
+
+    i18n.on("languageChanged", onLanguageChanged);
+
+    return () => {
+      i18n.off("languageChanged", onLanguageChanged);
+    };
   }, []);
 
   return <MuiThemeProvider theme={theme(dir)}>{children}</MuiThemeProvider>;

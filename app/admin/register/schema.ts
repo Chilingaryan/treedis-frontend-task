@@ -1,54 +1,68 @@
 import * as yup from "yup";
+import { InferType } from "yup";
 import { TFunction } from "i18next";
+import { Step } from "@/stores/useRegistrationStore";
 import { passwordSchema } from "@/utils/common-schemes";
 
-export const getRegisterSchema = (t: TFunction, step: 1 | 2) => {
-  switch (step) {
-    case 1: {
-      return yup.object({
-        firstName: yup.string().max(30).required(),
-        lastName: yup.string().max(30).required(),
-        email: yup
-          .string()
-          .email("Invalid email")
-          .required("Email is required"),
-        password: passwordSchema(t),
-        confirmPassword: yup
-          .string()
-          .required("Confirm your password")
-          .oneOf([yup.ref("password")], "Passwords must match"),
-      });
-    }
-    case 2: {
-      return yup.object({
-        email: yup.string().email("Invalid email").required("Required"),
-        company: yup.string().required("Required"),
-        phone: yup.string().required("Required"),
-        country: yup.string().required("Required"),
-        heardFrom: yup.string().required("Required"),
-        isProvider: yup.string().required("Select Yes or No"),
+export const getRegisterSchema = (t: TFunction, step: Step) =>
+  step === 1 ? step1Schema(t) : step2Schema(t);
 
-        spaces: yup.string().when("isProvider", {
-          is: "true",
-          then: (schema) => schema.required("Required when provider is true"),
-          otherwise: (schema) => schema.notRequired(),
-        }),
+const step1Schema = (t: TFunction) =>
+  yup.object({
+    firstName: yup
+      .string()
+      .max(30, t("validation.max30"))
+      .required(t("validation.required")),
+    lastName: yup
+      .string()
+      .max(30, t("validation.max30"))
+      .required(t("validation.required")),
+    email: yup
+      .string()
+      .email(t("validation.invalidEmail"))
+      .required(t("validation.emailRequired")),
+    password: passwordSchema(t),
+    confirmPassword: yup
+      .string()
+      .required(t("validation.confirmPassword"))
+      .oneOf([yup.ref("password")], t("validation.passwordsMustMatch")),
+  });
 
-        industry: yup.string().when("isProvider", {
-          is: (val: string) => val !== "true",
-          then: (schema) => schema.required("Required when provider is false"),
-          otherwise: (schema) => schema.notRequired(),
-        }),
+const step2Schema = (t: TFunction) =>
+  yup.object({
+    email: yup
+      .string()
+      .email(t("validation.invalidEmail"))
+      .required(t("validation.emailRequired")),
 
-        employees: yup.string().required("Required"),
-        jobDescription: yup.string().required("Required"),
-        website: yup.string().required("Required"),
-        subscribe: yup.boolean(),
-        terms: yup.boolean().oneOf([true], "You must agree to the terms"),
-      });
-    }
-    default: {
-      return yup.object({});
-    }
-  }
-};
+    company: yup.string().required(t("validation.required")),
+    phone: yup.string().required(t("validation.required")),
+    country: yup.string().required(t("validation.required")),
+    heardFrom: yup.string().required(t("validation.required")),
+    isProvider: yup.string().required(t("validation.required")),
+
+    spaces: yup.string().when("isProvider", {
+      is: "true",
+      then: (schema) => schema.required(t("validation.required")),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+
+    industry: yup.string().when("isProvider", {
+      is: (val: string) => val !== "true",
+      then: (schema) => schema.required(t("validation.required")),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+
+    employees: yup.string().required(t("validation.required")),
+    jobDescription: yup.string().required(t("validation.required")),
+    website: yup.string().required(t("validation.required")),
+
+    subscribe: yup.boolean(),
+
+    terms: yup.boolean().oneOf([true], t("validation.termsRequired")),
+  });
+
+export type Step1Fields = InferType<ReturnType<typeof step1Schema>>;
+export type Step2Fields = InferType<ReturnType<typeof step2Schema>>;
+
+export type FullRegisterForm = Step1Fields & Step2Fields;

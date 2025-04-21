@@ -1,15 +1,13 @@
-import { Control, Controller, FieldValues, Path } from "react-hook-form";
+import { useState } from "react";
 import {
   IconButton,
   InputAdornment,
   TextField,
   TextFieldProps,
 } from "@mui/material";
-import { useState } from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import i18n from "@/translations/i18n";
-import { isRtl } from "@/utils/language";
+import { Control, Controller, FieldValues, Path } from "react-hook-form";
 
 type FormInputProps<T extends FieldValues> = {
   name: Path<T>;
@@ -26,8 +24,6 @@ export function FormInput<T extends FieldValues>({
   ...props
 }: FormInputProps<T>) {
   const [showPassword, setShowPassword] = useState(type !== "password");
-
-  const is = isRtl(i18n.language);
 
   return (
     <Controller
